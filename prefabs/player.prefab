@@ -1,11 +1,15 @@
 {
   "RootObject": {
-    "Id": "b1f53794-59e3-4af3-90a4-f728a646c8e2",
+    "Id": "432dd5e6-cf70-44e8-8bd5-b647c8adb0cb",
     "Name": "player",
     "Enabled": true,
     "Components": [
       {
-        "__type": "Player"
+        "__type": "Player",
+        "Body": {
+          "_type": "gameobject",
+          "go": "69396198-a9d0-4936-a41c-648876a74162"
+        }
       },
       {
         "__type": "SphereCollider",
@@ -28,7 +32,7 @@
     ],
     "Children": [
       {
-        "Id": "40dc6e60-51f5-4175-93c4-e4760e4dfd9b",
+        "Id": "69396198-a9d0-4936-a41c-648876a74162",
         "Name": "Body",
         "Rotation": "0,-0,-0.04361939,0.9990482",
         "Enabled": true,
@@ -49,14 +53,14 @@
             "__type": "PlayerDresser",
             "BodyRenderer": {
               "_type": "component",
-              "go": "40dc6e60-51f5-4175-93c4-e4760e4dfd9b",
+              "go": "69396198-a9d0-4936-a41c-648876a74162",
               "component_type": "SkinnedModelRenderer"
             }
           }
         ]
       },
       {
-        "Id": "f98d2d19-7672-4cd0-ad2e-d518c3c7b3c6",
+        "Id": "200f0c6f-cd0e-4555-81e1-3b67041b6581",
         "Name": "Nametag",
         "Position": "0,0,10.82337",
         "Rotation": "0,-0.7071068,0,0.7071068",
@@ -81,7 +85,7 @@
         ]
       },
       {
-        "Id": "d9c78bbc-e3f7-4dc8-bbe2-2b3efe0e0722",
+        "Id": "44cf522d-efe3-4331-9c08-1f41a743f9e6",
         "Name": "Voice",
         "Position": "31.10438,1.461991,-52.37375",
         "Enabled": true,

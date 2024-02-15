@@ -6,16 +6,13 @@ public sealed class CameraFollower : Component
 	{
 		var pos = Vector3.Zero;
 		int am = 0;
-		float scl = 1f;
+		float scl = 0f;
 		foreach ( var player in Scene.GetAllComponents<Player>() )
 		{
 			if ( player.Network.OwnerId != Connection.Local.Id ) continue;
 			pos += player.Transform.Position;
 			am++;
-			if ( player.Scale > scl )
-			{
-				scl = player.Scale;
-			}
+			scl += player.Scale;
 		}
 		if ( am > 0 )
 		{

@@ -129,6 +129,80 @@
           "__type": "GameHud"
         }
       ]
+    },
+    {
+      "Id": "12cfbbaa-dde4-43cd-9341-6d099c4d7da0",
+      "Name": "Plane-Top",
+      "Position": "-5000,0,32",
+      "Scale": "0.1,100,1",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ModelRenderer",
+          "BodyGroups": 18446744073709551615,
+          "MaterialGroup": null,
+          "MaterialOverride": "dev/helper/reflectivity_90b.vmat",
+          "Model": "models/dev/plane.vmdl",
+          "RenderType": "On",
+          "Tint": "0,0,0,1"
+        }
+      ]
+    },
+    {
+      "Id": "695a1ff0-9c7a-4ea8-b667-042aa89be9dc",
+      "Name": "Plane-Bottom",
+      "Position": "5000,0,32",
+      "Scale": "0.1,100,1",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ModelRenderer",
+          "BodyGroups": 18446744073709551615,
+          "MaterialGroup": null,
+          "MaterialOverride": "dev/helper/reflectivity_90b.vmat",
+          "Model": "models/dev/plane.vmdl",
+          "RenderType": "On",
+          "Tint": "0,0,0,1"
+        }
+      ]
+    },
+    {
+      "Id": "0ccd7c0c-78c1-4314-a579-3a1978150b80",
+      "Name": "Plane-Right",
+      "Position": "0.0002980232,5000,32",
+      "Rotation": "0,0,0.7071068,0.7071068",
+      "Scale": "0.1,100,1",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ModelRenderer",
+          "BodyGroups": 18446744073709551615,
+          "MaterialGroup": null,
+          "MaterialOverride": "dev/helper/reflectivity_90b.vmat",
+          "Model": "models/dev/plane.vmdl",
+          "RenderType": "On",
+          "Tint": "0,0,0,1"
+        }
+      ]
+    },
+    {
+      "Id": "d42f9385-7583-452d-9f25-50e9cc7d0177",
+      "Name": "Plane-Left",
+      "Position": "-0.0002980232,-5000,32",
+      "Rotation": "0,0,0.7071068,0.7071068",
+      "Scale": "0.1,100,1",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ModelRenderer",
+          "BodyGroups": 18446744073709551615,
+          "MaterialGroup": null,
+          "MaterialOverride": "dev/helper/reflectivity_90b.vmat",
+          "Model": "models/dev/plane.vmdl",
+          "RenderType": "On",
+          "Tint": "0,0,0,1"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -154,6 +228,6 @@
   },
   "Title": "minimal",
   "Description": "",
-  "LastSaved": "2024-02-15T15:35:46.6732555-05:00",
+  "LastSaved": "2024-02-15T16:27:17.09004-05:00",
   "__references": []
 }

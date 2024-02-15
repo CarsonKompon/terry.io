@@ -3,8 +3,9 @@ using System;
 
 public sealed class Player : Component, Component.ITriggerListener
 {
+	[Property] GameObject Body { get; set; }
 	[Sync] public int Score { get; set; } = 10;
-	public float Speed => (Transform.Scale.x / MathF.Pow( Transform.Scale.x, 1.44f )) * 640f;
+	public float Speed => (Body.Transform.Scale.x / MathF.Pow( Body.Transform.Scale.x, 1.44f )) * 640f;
 	public float Scale => MathF.Sqrt( Score / 10f );
 
 	Vector3 Velocity { get; set; } = Vector2.Zero;
@@ -19,6 +20,11 @@ public sealed class Player : Component, Component.ITriggerListener
 
 	protected override void OnUpdate()
 	{
+		// Scale the player
+		var currentScale = Body.Transform.Scale.x;
+		currentScale = MathX.LerpTo( currentScale, Scale, Time.Delta * 2 );
+		Body.Transform.Scale = new Vector3( currentScale, currentScale, currentScale );
+
 		if ( IsProxy ) return;
 
 		// Get mouse input
@@ -35,11 +41,6 @@ public sealed class Player : Component, Component.ITriggerListener
 		pos.x = MathX.Clamp( pos.x, -5000, 5000 );
 		pos.y = MathX.Clamp( pos.y, -5000, 5000 );
 		Transform.Position = pos;
-
-		// Scale the player
-		var currentScale = Transform.Scale.x;
-		currentScale = MathX.LerpTo( currentScale, Scale, Time.Delta * 2 );
-		Transform.Scale = new Vector3( currentScale, currentScale, currentScale );
 
 		// Check if we can eat anything in range
 		foreach ( var obj in ObjectsInRange )
