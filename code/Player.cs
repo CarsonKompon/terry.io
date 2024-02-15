@@ -3,9 +3,8 @@ using System;
 
 public sealed class Player : Component, Component.ITriggerListener
 {
-	[Property] GameObject Body { get; set; }
 	[Sync] public int Score { get; set; } = 10;
-	public float Speed => (Body.Transform.Scale.x / MathF.Pow( Body.Transform.Scale.x, 1.44f )) * 640f;
+	public float Speed => (Transform.Scale.x / MathF.Pow( Transform.Scale.x, 1.44f )) * 640f;
 	public float Scale => MathF.Sqrt( Score / 10f );
 
 	Vector3 Velocity { get; set; } = Vector2.Zero;
@@ -21,9 +20,9 @@ public sealed class Player : Component, Component.ITriggerListener
 	protected override void OnUpdate()
 	{
 		// Scale the player
-		var currentScale = Body.Transform.Scale.x;
+		var currentScale = Transform.Scale.x;
 		currentScale = MathX.LerpTo( currentScale, Scale, Time.Delta * 2 );
-		Body.Transform.Scale = currentScale;
+		Transform.Scale = currentScale;
 
 		if ( IsProxy ) return;
 
@@ -45,7 +44,7 @@ public sealed class Player : Component, Component.ITriggerListener
 		// Check if we can eat anything in range
 		foreach ( var obj in ObjectsInRange )
 		{
-			if ( obj.Transform.Position.Distance( Transform.Position ) > (64f * Body.Transform.Scale.x) ) continue;
+			if ( obj.Transform.Position.Distance( Transform.Position ) > (64f * Transform.Scale.x) ) continue;
 			if ( obj.Components.Get<Pellet>() is Pellet pellet )
 			{
 				Eat( pellet.Value );
