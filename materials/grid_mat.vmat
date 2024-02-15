@@ -1,0 +1,14 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/infinite_grid.shader"
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
+	Texture_ps_0 "materials/grid.png"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+}

@@ -1,0 +1,68 @@
+@using System;
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+	@if(KillerSteamId != 0)
+	{
+		<div class="game-over">
+			<h1>Game Over</h1>
+			<div class="results">
+				<p>You were killed by:</p>
+				<div class="person">
+					<img src=@("avatar:" + KillerSteamId) class="avatar" />
+					<p class="name">@(new Friend((long)KillerSteamId).Name)</p>
+				</div>
+			</div>
+			@* <button onclick=@(BlobManager.Instance.RespawnLocalPlayer) >Respawn</button> *@
+		</div>
+		return;
+	}
+
+	@if(Player.Local is not Player self) return;
+	<div class="score">Score: @(self.TopScore)</div>
+
+	<div class="leaderboard">
+		<h1>Leaderboard</h1>
+		<div class="entries">
+			@if(true)
+			{
+				var players = Scene.GetAllComponents<Player>();
+				@for(int i=0; i<MathF.Min(players.Count(), 5); i++)
+				{
+					<div class="entry @(players.ElementAt(i).Network.OwnerId == self.Network.OwnerId ? "self" : "")">
+						<p class="position">##@(i + 1)</p>
+						<p class="name">@players.ElementAt(i).Network.OwnerConnection.DisplayName</p>
+					</div>
+				}
+			}
+		</div>
+	</div>
+</root>
+
+@code
+{
+	public static GameHud Instance { get; private set; }
+
+	ulong KillerSteamId = 0;
+	TimeSince timeSinceRefresh = 0;
+	
+	protected override void OnStart()
+	{
+		base.OnStart();
+		Instance = this;
+	}
+
+	public void ShowGameOver(ulong killerId)
+	{
+		KillerSteamId = killerId;
+	}
+
+	public void HideGameOver()
+	{
+		KillerSteamId = 0;
+	}
+
+	protected override int BuildHash() => System.HashCode.Combine( Player.Local?.Score, MathF.Floor(timeSinceRefresh), KillerSteamId );
+}

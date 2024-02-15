@@ -1,0 +1,144 @@
+{
+  "Id": "9f832399-4887-46b0-8f21-2ee284f538e2",
+  "GameObjects": [
+    {
+      "Id": "99737b21-7462-4381-9810-3c5e70efc300",
+      "Name": "Game Manager",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "NetworkHelper",
+          "PlayerPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/player.prefab"
+          },
+          "SpawnPoints": [],
+          "StartServer": true
+        },
+        {
+          "__type": "BlobManager",
+          "PelletPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/pellet.prefab"
+          },
+          "PlayerPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/player.prefab"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "bfc59c12-1ed2-4f91-8956-a95a315eac3c",
+      "Name": "Sun",
+      "Rotation": "-0.00000008039427,0.7071068,0.00000008039427,0.7071068",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "DirectionalLight",
+          "FogMode": "Enabled",
+          "FogStrength": 1,
+          "LightColor": "1,1,1,1",
+          "Shadows": true,
+          "SkyColor": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "Id": "c5715f32-e0c3-4a99-a687-7bf02deca880",
+      "Name": "Camera",
+      "Position": "0,0,300.2329",
+      "Rotation": "-0.7071068,-0.00000003090862,0.7071068,-0.00000003090862",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "CameraComponent",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "IsMainCamera": true,
+          "Orthographic": true,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        },
+        {
+          "__type": "Highlight"
+        },
+        {
+          "__type": "AudioListener"
+        }
+      ],
+      "Children": [
+        {
+          "Id": "72fe1176-a254-467b-939d-62229691db01",
+          "Name": "Plane",
+          "Position": "1500,0,0",
+          "Rotation": "-0.0000000000000006698506,-0.7071067,-0.00000006181723,0.7071068",
+          "Scale": "100,100,1",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/grid_mat.vmat",
+              "Model": "models/dev/plane.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "b817fcc9-66f1-4ffa-9375-9b7ad0748d76",
+      "Name": "Screen UI",
+      "Position": "421.4535,-69.91743,703.108",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ScreenPanel",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
+        },
+        {
+          "__type": "GameHud"
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "Lerping": true,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 60,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "minimal",
+  "Description": "",
+  "LastSaved": "2024-02-15T13:22:59.980592-05:00",
+  "__references": []
+}

@@ -1,0 +1,48 @@
+{
+  "RootObject": {
+    "Id": "b775f297-3a25-4b18-91f1-997065846676",
+    "Name": "pellet",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Pellet",
+        "Renderer": {
+          "_type": "component",
+          "go": "74279ea0-b0d2-4c90-9bb4-824ccd948ccf",
+          "component_type": "ModelRenderer"
+        }
+      },
+      {
+        "__type": "SphereCollider",
+        "Center": "0,0,0",
+        "IsTrigger": false,
+        "Radius": 10.199978,
+        "Static": false,
+        "Surface": null
+      }
+    ],
+    "Children": [
+      {
+        "Id": "74279ea0-b0d2-4c90-9bb4-824ccd948ccf",
+        "Name": "Body",
+        "Scale": "0.25,0.25,0.25",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "BodyGroups": 18446744073709551615,
+            "MaterialGroup": null,
+            "MaterialOverride": "materials/wobbly_worldspace_mat.vmat",
+            "Model": "models/circle_16.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}

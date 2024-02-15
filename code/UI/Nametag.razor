@@ -1,0 +1,15 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+	<p>@(Network.OwnerConnection.DisplayName</p>
+</root>
+
+@code
+{
+
+	[Property] GameObject Parent { get; set; }
+
+	protected override int BuildHash() => System.HashCode.Combine( Parent.Network.OwnerConnection?.DisplayName );
+}

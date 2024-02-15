@@ -1,0 +1,53 @@
+{
+  "Model": "models/dev/plane.vmdl",
+  "Description": "",
+  "BlendMode": "Opaque",
+  "nodes": [
+    {
+      "_class": "Result",
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "0",
+      "Position": "160,-96",
+      "Albedo": {
+        "Identifier": "1",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": null,
+      "Sampler": {},
+      "UI": {
+        "Name": "",
+        "Default": "1,1,1,1",
+        "SrgbRead": true,
+        "CreateInput": "CreateInputTexture2D"
+      },
+      "Identifier": "1",
+      "Position": "-208,-64",
+      "Coords": {
+        "Identifier": "3",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "WorldPosition",
+      "Identifier": "2",
+      "Position": "-704,-32"
+    },
+    {
+      "_class": "Divide",
+      "DefaultA": 0,
+      "DefaultB": 128,
+      "Identifier": "3",
+      "Position": "-416,48",
+      "A": {
+        "Identifier": "2",
+        "Output": "Result"
+      }
+    }
+  ]
+}

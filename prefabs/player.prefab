@@ -1,0 +1,107 @@
+{
+  "RootObject": {
+    "Id": "a62e580c-87c3-4f3d-b7a5-9da0e2b52013",
+    "Name": "player",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Player"
+      },
+      {
+        "__type": "SphereCollider",
+        "Center": "0,0,0",
+        "IsTrigger": true,
+        "Radius": 79.999916,
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "HighlightOutline",
+        "Color": "0.5907,0.5907,0.5907,1",
+        "InsideColor": "0,0,0,0",
+        "InsideObscuredColor": "0,0,0,0",
+        "Material": null,
+        "ObscuredColor": "0,0,0,0.4",
+        "Width": 0.54999983
+      }
+    ],
+    "Children": [
+      {
+        "Id": "3d048c08-5a8e-44d6-9c13-46d4cad439d1",
+        "Name": "Body",
+        "Rotation": "0,-0,-0.04361939,0.9990482",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "AnimationGraph": null,
+            "BodyGroups": 18446744073709551615,
+            "BoneMergeTarget": null,
+            "CreateBoneObjects": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/circle_32.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "PlayerDresser",
+            "BodyRenderer": {
+              "_type": "component",
+              "go": "3d048c08-5a8e-44d6-9c13-46d4cad439d1",
+              "component_type": "SkinnedModelRenderer"
+            }
+          }
+        ]
+      },
+      {
+        "Id": "636a3d91-d64d-4b0f-a790-5981ac7ce58a",
+        "Name": "Nametag",
+        "Position": "0,0,10.82337",
+        "Rotation": "0,-0.7071068,0,0.7071068",
+        "Scale": "4,4,4",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "WorldPanel",
+            "HorizontalAlign": "Center",
+            "LookAtCamera": false,
+            "PanelSize": "640,512",
+            "RenderScale": 1,
+            "VerticalAlign": "Center"
+          },
+          {
+            "__type": "Nametag",
+            "Parent": {
+              "_type": "gameobject",
+              "prefab": "prefabs/player.prefab"
+            }
+          }
+        ]
+      },
+      {
+        "Id": "6fe691b5-56b4-4748-a93b-07462807f4ee",
+        "Name": "Voice",
+        "Position": "31.10438,1.461991,-52.37375",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Voice",
+            "Loopback": false,
+            "Mode": "PushToTalk",
+            "MorphScale": 3,
+            "MorphSmoothTime": 0.1,
+            "PushToTalkInput": "voice",
+            "Renderer": null,
+            "Volume": 1,
+            "WorldspacePlayback": true
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
