@@ -23,7 +23,7 @@ public sealed class Player : Component, Component.ITriggerListener
 		// Scale the player
 		var currentScale = Body.Transform.Scale.x;
 		currentScale = MathX.LerpTo( currentScale, Scale, Time.Delta * 2 );
-		Body.Transform.Scale = new Vector3( currentScale, currentScale, currentScale );
+		Body.Transform.Scale = currentScale;
 
 		if ( IsProxy ) return;
 
@@ -45,7 +45,7 @@ public sealed class Player : Component, Component.ITriggerListener
 		// Check if we can eat anything in range
 		foreach ( var obj in ObjectsInRange )
 		{
-			if ( obj.Transform.Position.Distance( Transform.Position ) > (64f * currentScale) ) continue;
+			if ( obj.Transform.Position.Distance( Transform.Position ) > (64f * Body.Transform.Scale.x) ) continue;
 			if ( obj.Components.Get<Pellet>() is Pellet pellet )
 			{
 				Eat( pellet.Value );

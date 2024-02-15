@@ -1,0 +1,96 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using Sandbox.Network;
+@using System.Collections.Generic;
+@using System.Threading.Tasks;
+@inherits PanelComponent
+
+<root>
+    <img src="/ui/terry_io.png" class="logo" />
+	<div class="lobby-list">
+		<div class="header">
+			<div class="title">Server List</div>
+		</div>
+
+		<div class="content">
+
+			@if (refreshing)
+			{
+				<div>Refreshing..</div>
+			}
+			else if (list.Count == 0)
+			{
+				<div>No lobbies were found</div>
+			}
+			else
+			{
+				@foreach (var lobby in list)
+				{
+					<div class="button" onclick=@(() => OpenLobby( lobby ) )>
+
+						<div class="title">
+							@lobby.Name
+						</div>
+
+						<div class="meta">
+
+							@* <div class="map">
+								@lobby.Map
+							</div> *@
+
+							<div class="count">
+								@lobby.Members / @lobby.MaxMembers
+							</div>
+
+						</div>
+
+					</div>
+				}
+			}
+		</div>
+
+		<div class="button" onclick=@StartGame>Create New Server</div>
+	</div>
+</root>
+
+@code
+{
+
+	bool refreshing;
+    List<LobbyInformation> list = new();
+
+	[Property] SceneFile GameScene { get; set; }
+
+	protected override void OnStart()
+	{
+		_ = RefreshLobbyList();
+	}
+
+	async Task RefreshLobbyList()
+    {
+        while ( true )
+        {
+            refreshing = true;
+            StateHasChanged();
+
+            list = await Networking.QueryLobbies();
+
+            refreshing = false;
+            StateHasChanged();
+
+            await Task.DelayRealtimeSeconds( 5.0f );
+        }
+    }
+
+	void OpenLobby( LobbyInformation lobby )
+    {
+        GameNetworkSystem.Connect( lobby.LobbyId );
+    }
+
+	void StartGame()
+	{
+		Scene.Load( GameScene );
+	}
+
+	protected override int BuildHash() => System.HashCode.Combine( refreshing );
+}

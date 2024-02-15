@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "432dd5e6-cf70-44e8-8bd5-b647c8adb0cb",
+    "Id": "e118218c-48fd-4504-9645-063c782b4735",
     "Name": "player",
     "Enabled": true,
     "Components": [
@@ -8,16 +8,8 @@
         "__type": "Player",
         "Body": {
           "_type": "gameobject",
-          "go": "69396198-a9d0-4936-a41c-648876a74162"
+          "go": "24e8dcee-8076-4366-b918-3ad728d12f77"
         }
-      },
-      {
-        "__type": "SphereCollider",
-        "Center": "0,0,0",
-        "IsTrigger": true,
-        "Radius": 79.999916,
-        "Static": false,
-        "Surface": null
       },
       {
         "__type": "HighlightOutline",
@@ -32,7 +24,7 @@
     ],
     "Children": [
       {
-        "Id": "69396198-a9d0-4936-a41c-648876a74162",
+        "Id": "24e8dcee-8076-4366-b918-3ad728d12f77",
         "Name": "Body",
         "Rotation": "0,-0,-0.04361939,0.9990482",
         "Enabled": true,
@@ -53,14 +45,22 @@
             "__type": "PlayerDresser",
             "BodyRenderer": {
               "_type": "component",
-              "go": "69396198-a9d0-4936-a41c-648876a74162",
+              "go": "24e8dcee-8076-4366-b918-3ad728d12f77",
               "component_type": "SkinnedModelRenderer"
             }
+          },
+          {
+            "__type": "SphereCollider",
+            "Center": "0,0,0",
+            "IsTrigger": true,
+            "Radius": 79.999916,
+            "Static": false,
+            "Surface": null
           }
         ]
       },
       {
-        "Id": "200f0c6f-cd0e-4555-81e1-3b67041b6581",
+        "Id": "c58085c6-2d81-4642-ab6b-cd354cec80e7",
         "Name": "Nametag",
         "Position": "0,0,10.82337",
         "Rotation": "0,-0.7071068,0,0.7071068",
@@ -85,7 +85,7 @@
         ]
       },
       {
-        "Id": "44cf522d-efe3-4331-9c08-1f41a743f9e6",
+        "Id": "5d19d461-7e56-43bb-a086-94cfdee205cc",
         "Name": "Voice",
         "Position": "31.10438,1.461991,-52.37375",
         "Enabled": true,
