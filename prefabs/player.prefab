@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "a62e580c-87c3-4f3d-b7a5-9da0e2b52013",
+    "Id": "b1f53794-59e3-4af3-90a4-f728a646c8e2",
     "Name": "player",
     "Enabled": true,
     "Components": [
@@ -17,6 +17,7 @@
       },
       {
         "__type": "HighlightOutline",
+        "__enabled": false,
         "Color": "0.5907,0.5907,0.5907,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
@@ -27,7 +28,7 @@
     ],
     "Children": [
       {
-        "Id": "3d048c08-5a8e-44d6-9c13-46d4cad439d1",
+        "Id": "40dc6e60-51f5-4175-93c4-e4760e4dfd9b",
         "Name": "Body",
         "Rotation": "0,-0,-0.04361939,0.9990482",
         "Enabled": true,
@@ -48,14 +49,14 @@
             "__type": "PlayerDresser",
             "BodyRenderer": {
               "_type": "component",
-              "go": "3d048c08-5a8e-44d6-9c13-46d4cad439d1",
+              "go": "40dc6e60-51f5-4175-93c4-e4760e4dfd9b",
               "component_type": "SkinnedModelRenderer"
             }
           }
         ]
       },
       {
-        "Id": "636a3d91-d64d-4b0f-a790-5981ac7ce58a",
+        "Id": "f98d2d19-7672-4cd0-ad2e-d518c3c7b3c6",
         "Name": "Nametag",
         "Position": "0,0,10.82337",
         "Rotation": "0,-0.7071068,0,0.7071068",
@@ -80,7 +81,7 @@
         ]
       },
       {
-        "Id": "6fe691b5-56b4-4748-a93b-07462807f4ee",
+        "Id": "d9c78bbc-e3f7-4dc8-bbe2-2b3efe0e0722",
         "Name": "Voice",
         "Position": "31.10438,1.461991,-52.37375",
         "Enabled": true,

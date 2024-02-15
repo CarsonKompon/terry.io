@@ -24,6 +24,10 @@
           "PlayerPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/player.prefab"
+          },
+          "VirusPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/virus.prefab"
           }
         }
       ]
@@ -73,6 +77,9 @@
         },
         {
           "__type": "AudioListener"
+        },
+        {
+          "__type": "CameraFollower"
         }
       ],
       "Children": [
@@ -92,6 +99,14 @@
               "Model": "models/dev/plane.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "PlaneCollider",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "100,100",
+              "Static": true,
+              "Surface": null
             }
           ]
         }
@@ -139,6 +154,6 @@
   },
   "Title": "minimal",
   "Description": "",
-  "LastSaved": "2024-02-15T13:22:59.980592-05:00",
+  "LastSaved": "2024-02-15T15:35:46.6732555-05:00",
   "__references": []
 }

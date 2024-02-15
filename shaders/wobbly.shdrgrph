@@ -42,7 +42,7 @@
     {
       "_class": "Multiply",
       "DefaultA": 0,
-      "DefaultB": 2,
+      "DefaultB": 4,
       "Identifier": "4",
       "Position": "32,-32",
       "A": {

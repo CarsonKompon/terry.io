@@ -3,19 +3,17 @@ using System;
 
 public sealed class Player : Component, Component.ITriggerListener
 {
-	public static Player Local => GameManager.ActiveScene.GetAllComponents<Player>().FirstOrDefault( x => !x.IsProxy );
+	[Sync] public int Score { get; set; } = 10;
+	public float Speed => (Transform.Scale.x / MathF.Pow( Transform.Scale.x, 1.44f )) * 640f;
+	public float Scale => MathF.Sqrt( Score / 10f );
 
-	[Sync] public int Score { get; set; }
-	[Sync] public int TopScore { get; set; }
-	public float Speed => 450f / Transform.Scale.x;
-	public float Scale => MathX.Clamp( 1 + TopScore / 50f, 1, 25 );
-
+	Vector3 Velocity { get; set; } = Vector2.Zero;
+	TimeUntil timeUntilMerge = 0f;
 	List<GameObject> ObjectsInRange = new();
 
 	protected override void OnStart()
 	{
-		Score = 0;
-		TopScore = 0;
+		timeUntilMerge = 30 + (Score * 0.02f);
 		ObjectsInRange.Clear();
 	}
 
@@ -24,13 +22,16 @@ public sealed class Player : Component, Component.ITriggerListener
 		if ( IsProxy ) return;
 
 		// Get mouse input
-		var centerX = Screen.Width / 2f;
-		var centerY = Screen.Height / 2f;
-		var mouse = new Vector2( (Mouse.Position.x - centerX) / 200f, (Mouse.Position.y - centerY) / 200f ).Normal;
+		var center = Transform.Position.WithZ( 0 );
+		var mouseRay = Scene.Camera.ScreenPixelToRay( Mouse.Position );
+		var mousePos = Scene.Trace.Ray( mouseRay, 10000f ).Run().HitPosition.WithZ( 0 );
+		var mouse = new Vector2( (mousePos.x - center.x) / 200f, (mousePos.y - center.y) / 200f );
+		if ( mouse.Length > 1f ) mouse = mouse.Normal;
 
 		// Move player
 		var pos = Transform.Position;
-		pos += new Vector3( mouse.y, mouse.x, 0 ) * Time.Delta * Speed;
+		Velocity = Velocity.LerpTo( mouse * Speed, Time.Delta * 10 );
+		pos += new Vector3( Velocity.x, Velocity.y, 0 ) * Time.Delta;
 		pos.x = MathX.Clamp( pos.x, -5000, 5000 );
 		pos.y = MathX.Clamp( pos.y, -5000, 5000 );
 		Transform.Position = pos;
@@ -39,9 +40,6 @@ public sealed class Player : Component, Component.ITriggerListener
 		var currentScale = Transform.Scale.x;
 		currentScale = MathX.LerpTo( currentScale, Scale, Time.Delta * 2 );
 		Transform.Scale = new Vector3( currentScale, currentScale, currentScale );
-
-		// Move camera to player
-		Scene.Camera.Transform.Position = Transform.Position.WithZ( 200 );
 
 		// Check if we can eat anything in range
 		foreach ( var obj in ObjectsInRange )
@@ -54,11 +52,47 @@ public sealed class Player : Component, Component.ITriggerListener
 			}
 			if ( obj.Components.GetInParentOrSelf<Player>() is Player other )
 			{
-				if ( other.Scale <= (Scale * 0.85f) )
+				if ( timeUntilMerge > 0f && Network.OwnerId == other.Network.OwnerId ) continue;
+				if ( other.Scale <= (Scale * 0.85f) || (Network.OwnerId == other.Network.OwnerId && other.timeUntilMerge <= 0f) )
 				{
 					Eat( other.Score );
 					other.Kill( Network.OwnerConnection.SteamId );
 				}
+			}
+		}
+
+		// Push out of friendlies
+		if ( timeUntilMerge > 0f )
+		{
+			foreach ( var other in Scene.GetAllComponents<Player>() )
+			{
+				if ( other == this ) continue;
+				if ( other.Network.OwnerId != Network.OwnerId ) continue;
+				var dist = other.Transform.Position.Distance( Transform.Position );
+				if ( dist < (128f * currentScale) )
+				{
+					var dir = (Transform.Position - other.Transform.Position).Normal;
+					Velocity += dir * Speed * 40f * Time.Delta;
+				}
+			}
+		}
+
+		// Split
+		if ( Input.Pressed( "Jump" ) )
+		{
+			if ( Score >= 35 )
+			{
+				int half = (int)MathF.Floor( Score / 2f );
+				Score -= half;
+				Transform.Scale = new Vector3( Scale, Scale, Scale );
+				var split = GameObject.Clone( Transform.World );
+				split.NetworkSpawn();
+				var splitPlayer = split.Components.Get<Player>();
+				splitPlayer.Transform.Scale = new Vector3( splitPlayer.Scale, splitPlayer.Scale, splitPlayer.Scale );
+				splitPlayer.Score = half;
+				splitPlayer.timeUntilMerge = 30 + (half * 0.02f);
+				splitPlayer.Velocity = Velocity * 12f;
+				ObjectsInRange.Add( split );
 			}
 		}
 	}
@@ -66,17 +100,17 @@ public sealed class Player : Component, Component.ITriggerListener
 	public void Eat( int value )
 	{
 		Score += value;
-		TopScore = Math.Max( Score, TopScore );
 	}
 
 	[Broadcast]
 	public void Kill( ulong killer )
 	{
-		if ( !IsProxy )
+		if ( !IsProxy && Scene.GetAllComponents<Player>().Where( x => x.Network.OwnerId == Network.OwnerId ).Count() <= 1 )
 		{
 			GameHud.Instance.ShowGameOver( killer );
 		}
-		GameObject.Destroy();
+
+		GameObject.DestroyImmediate();
 	}
 
 	public void OnTriggerEnter( Collider other )
@@ -89,5 +123,36 @@ public sealed class Player : Component, Component.ITriggerListener
 	{
 		if ( ObjectsInRange.Contains( other.GameObject ) )
 			ObjectsInRange.Remove( other.GameObject );
+	}
+
+	public static Dictionary<Connection, int> GetScores()
+	{
+		var scores = new Dictionary<Connection, int>();
+		foreach ( var player in GameManager.ActiveScene.GetAllComponents<Player>() )
+		{
+			if ( scores.ContainsKey( player.Network.OwnerConnection ) )
+			{
+				scores[player.Network.OwnerConnection] += player.Score;
+			}
+			else
+			{
+				scores.Add( player.Network.OwnerConnection, player.Score );
+			}
+		}
+		scores = scores.OrderByDescending( x => x.Value ).ToDictionary( x => x.Key, x => x.Value );
+		return scores;
+	}
+
+	public static int GetLocalScore()
+	{
+		int score = 0;
+		foreach ( var player in GameManager.ActiveScene.GetAllComponents<Player>() )
+		{
+			if ( player.Network.OwnerId == Connection.Local.Id )
+			{
+				score += player.Score;
+			}
+		}
+		return score;
 	}
 }

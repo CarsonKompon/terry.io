@@ -61,13 +61,16 @@ VS
 
 		VS_DecodeObjectSpaceNormalAndTangent( v, i.vNormalOs, i.vTangentUOs_flTangentVSign );
 		
-		float l_0 = g_flTime / 0.5;
-		float3 l_1 = i.vPositionOs;
-		float3 l_2 = l_1 / float3( 6, 6, 6 );
+		float l_0 = g_flTime / 0.2;
+		float3 l_1 = i.vPositionWs;
+		float3 l_2 = l_1 / float3( 0.01, 0.01, 0.01 );
 		float3 l_3 = float3( l_0, l_0, l_0 ) + l_2;
 		float3 l_4 = sin( l_3 );
-		float3 l_5 = l_4 * float3( 4, 4, 4 );
-		i.vPositionWs.xyz += l_5;
+		float3 l_5 = l_4 * float3( 5, 5, 5 );
+		float l_6 = l_5.x;
+		float l_7 = l_5.y;
+		float4 l_8 = float4( l_6, l_7, 0, 0 );
+		i.vPositionWs.xyz += l_8.xyz;
 		i.vPositionPs.xyzw = Position3WsToPs( i.vPositionWs.xyz );
 		
 		return FinalizeVertex( i );
@@ -81,6 +84,7 @@ PS
 	SamplerState g_sSampler0 < Filter( ANISO ); AddressU( WRAP ); AddressV( WRAP ); >;
 	CreateInputTexture2D( color, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
 	Texture2D g_tcolor < Channel( RGBA, Box( color ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
+	float4 g_vTint < UiType( Color ); UiGroup( ",0/,0/0" ); Default4( 1.00, 1.00, 1.00, 1.00 ); >;
 	
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
@@ -96,8 +100,10 @@ PS
 		m.Transmission = 0;
 		
 		float4 l_0 = Tex2DS( g_tcolor, g_sSampler0, i.vTextureCoords.xy );
+		float4 l_1 = g_vTint;
+		float4 l_2 = l_0 * l_1;
 		
-		m.Albedo = l_0.xyz;
+		m.Albedo = l_2.xyz;
 		m.Opacity = 1;
 		m.Roughness = 1;
 		m.Metalness = 0;

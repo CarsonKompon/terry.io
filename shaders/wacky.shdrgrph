@@ -37,7 +37,7 @@
     {
       "_class": "Multiply",
       "DefaultA": 0,
-      "DefaultB": 2,
+      "DefaultB": 5,
       "Identifier": "3",
       "Position": "-128,-16",
       "A": {
@@ -63,7 +63,7 @@
     {
       "_class": "Divide",
       "DefaultA": 0,
-      "DefaultB": 0.5,
+      "DefaultB": 0.2,
       "Identifier": "5",
       "Position": "-656,-272",
       "A": {
@@ -74,7 +74,7 @@
     {
       "_class": "Divide",
       "DefaultA": 0,
-      "DefaultB": 6,
+      "DefaultB": 0.01,
       "Identifier": "6",
       "Position": "-640,0",
       "A": {

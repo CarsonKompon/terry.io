@@ -15,25 +15,24 @@
 					<p class="name">@(new Friend((long)KillerSteamId).Name)</p>
 				</div>
 			</div>
-			@* <button onclick=@(BlobManager.Instance.RespawnLocalPlayer) >Respawn</button> *@
+			<button onclick=@(BlobManager.Instance.RespawnLocalPlayer) >Respawn</button>
 		</div>
 		return;
 	}
 
-	@if(Player.Local is not Player self) return;
-	<div class="score">Score: @(self.TopScore)</div>
+	<div class="score">Score: @(Player.GetLocalScore())</div>
 
 	<div class="leaderboard">
 		<h1>Leaderboard</h1>
 		<div class="entries">
 			@if(true)
 			{
-				var players = Scene.GetAllComponents<Player>();
-				@for(int i=0; i<MathF.Min(players.Count(), 5); i++)
+				var scores = Player.GetScores();
+				@for(int i=0; i<MathF.Min(scores.Count(), 5); i++)
 				{
-					<div class="entry @(players.ElementAt(i).Network.OwnerId == self.Network.OwnerId ? "self" : "")">
+					<div class="entry @(scores.ElementAt(i).Key.Id == Connection.Local.Id ? "self" : "")">
 						<p class="position">##@(i + 1)</p>
-						<p class="name">@players.ElementAt(i).Network.OwnerConnection.DisplayName</p>
+						<p class="name">@scores.ElementAt(i).Key.DisplayName</p>
 					</div>
 				}
 			}
@@ -64,5 +63,5 @@
 		KillerSteamId = 0;
 	}
 
-	protected override int BuildHash() => System.HashCode.Combine( Player.Local?.Score, MathF.Floor(timeSinceRefresh), KillerSteamId );
+	protected override int BuildHash() => System.HashCode.Combine( Player.GetLocalScore(), MathF.Floor(timeSinceRefresh), KillerSteamId );
 }

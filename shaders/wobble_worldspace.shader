@@ -67,7 +67,10 @@ VS
 		float3 l_3 = float3( l_0, l_0, l_0 ) + l_2;
 		float3 l_4 = sin( l_3 );
 		float3 l_5 = l_4 * float3( 2, 2, 2 );
-		i.vPositionWs.xyz += l_5;
+		float l_6 = l_5.x;
+		float l_7 = l_5.y;
+		float4 l_8 = float4( l_6, l_7, 0, 0 );
+		i.vPositionWs.xyz += l_8.xyz;
 		i.vPositionPs.xyzw = Position3WsToPs( i.vPositionWs.xyz );
 		
 		return FinalizeVertex( i );
