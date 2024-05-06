@@ -3,7 +3,7 @@
 @inherits PanelComponent
 
 <root>
-	<p>@(Network.OwnerConnection.DisplayName)</p>
+	<p>@(Network.OwnerConnection?.DisplayName ?? "")</p>
 </root>
 
 @code

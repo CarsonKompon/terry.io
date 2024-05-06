@@ -128,7 +128,7 @@ public sealed class Player : Component, Component.ITriggerListener
 	public static Dictionary<Connection, int> GetScores()
 	{
 		var scores = new Dictionary<Connection, int>();
-		foreach ( var player in GameManager.ActiveScene.GetAllComponents<Player>() )
+		foreach ( var player in Game.ActiveScene.GetAllComponents<Player>() )
 		{
 			if ( scores.ContainsKey( player.Network.OwnerConnection ) )
 			{
@@ -146,7 +146,7 @@ public sealed class Player : Component, Component.ITriggerListener
 	public static int GetLocalScore()
 	{
 		int score = 0;
-		foreach ( var player in GameManager.ActiveScene.GetAllComponents<Player>() )
+		foreach ( var player in Game.ActiveScene.GetAllComponents<Player>() )
 		{
 			if ( player.Network.OwnerId == Connection.Local.Id )
 			{
