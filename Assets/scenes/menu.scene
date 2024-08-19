@@ -26,6 +26,10 @@
           "Viewport": "0,0,1,1",
           "ZFar": 10000,
           "ZNear": 10
+        },
+        {
+          "__type": "MainMenuCam",
+          "__guid": "79152ede-da7e-4007-b638-f0b08cbb31e6"
         }
       ]
     },
