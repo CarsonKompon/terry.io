@@ -1,21 +1,24 @@
 {
-  "Id": "00c28e11-e50f-412a-8ac8-d4da9e5e13ae",
+  "__guid": "dd0f9cda-6056-49a4-a72c-857b0045c96a",
   "GameObjects": [
     {
-      "Id": "88680308-9b91-4a49-aecd-699a241b6cc8",
+      "__guid": "88680308-9b91-4a49-aecd-699a241b6cc8",
+      "Flags": 0,
       "Name": "Camera",
-      "Position": "149.995,149.995,-212.125",
+      "Position": "0,0,94.03154",
+      "Rotation": "0,0.7071067,0,0.7071068",
       "Tags": "maincamera",
       "Enabled": true,
       "Components": [
         {
-          "__type": "CameraComponent",
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "3457ccfa-4602-47fb-a869-24939e48d941",
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
           "FieldOfView": 60,
           "IsMainCamera": true,
-          "Orthographic": false,
-          "OrthographicHeight": 1204,
+          "Orthographic": true,
+          "OrthographicHeight": 1024,
           "Priority": 1,
           "RenderExcludeTags": "",
           "RenderTags": "",
@@ -27,13 +30,15 @@
       ]
     },
     {
-      "Id": "513d69ec-990d-4aef-b226-b63ced98e02e",
+      "__guid": "513d69ec-990d-4aef-b226-b63ced98e02e",
+      "Flags": 0,
       "Name": "Screen",
       "Position": "149.995,149.995,-212.125",
       "Enabled": true,
       "Components": [
         {
-          "__type": "ScreenPanel",
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "1dba2d70-4dd2-4e8e-aa15-5b3d3910d19b",
           "AutoScreenScale": true,
           "Opacity": 1,
           "Scale": 1,
@@ -41,16 +46,55 @@
         },
         {
           "__type": "MainMenu",
+          "__guid": "f6a9f890-12a1-46e0-b275-61eed1814f24",
           "GameScene": "scenes/minimal.scene"
+        }
+      ]
+    },
+    {
+      "__guid": "249e4da3-06c7-472e-9dca-ab74a49e203d",
+      "Flags": 0,
+      "Name": "Plane",
+      "Scale": "1176.178,1176.178,1176.178",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "88736ec3-9ca5-4dea-824f-98ac52d9503f",
+          "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/grid_mat.vmat",
+          "Model": "models/dev/plane.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "27ae1953-771b-4906-90f5-1a0e18309879",
+      "Flags": 0,
+      "Name": "Sun",
+      "Position": "-0.00002288601,0,166.4335",
+      "Rotation": "0,0.7071067,0,0.7071068",
+      "Tags": "light_directional,light",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.DirectionalLight",
+          "__guid": "05ebf7c3-bc0b-4fec-9b7d-c0aca6654e4e",
+          "FogMode": "Enabled",
+          "FogStrength": 1,
+          "LightColor": "0.91373,0.98039,1,1",
+          "Shadows": true,
+          "SkyColor": "0,0,0,0"
         }
       ]
     }
   ],
   "SceneProperties": {
     "FixedUpdateFrequency": 50,
-    "Lerping": true,
     "MaxFixedUpdates": 5,
     "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
@@ -69,6 +113,7 @@
   },
   "Title": "menu",
   "Description": "",
-  "LastSaved": "2024-02-15T16:56:11.6006011-05:00",
-  "__references": []
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
 }

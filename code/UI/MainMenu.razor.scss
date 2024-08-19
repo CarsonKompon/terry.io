@@ -5,14 +5,13 @@ MainMenu
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: #444;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	font-family: Poppins;
 	pointer-events: all;
     flex-direction: column;
-    gap: 32px;
-    padding: 32px;
+    gap: 64px;
+    padding: 64px;
 
     > .logo
     {
@@ -23,9 +22,7 @@ MainMenu
 	{
 		flex-direction: column;
 		align-items: center;
-		width: 90%;
-		background-color: rgb(179, 179, 179);
-		border-radius: 16px;
+		width: 800px;
 		padding: 32px;
 		font-size: 24px;
         flex-grow: 1;
@@ -52,7 +49,7 @@ MainMenu
 		.button
 		{
 			width: 100%;
-			background-color: #666666;
+			background-color: black;
 			color: white;
 			font-size: 32px;
 			font-weight: bold;
@@ -66,7 +63,7 @@ MainMenu
 
 			&:hover
 			{
-				background-color: #8f8f8f;
+				background-color: #3d3d3d;
 			}
 		}
 	}

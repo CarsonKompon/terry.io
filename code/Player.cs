@@ -42,8 +42,10 @@ public sealed class Player : Component, Component.ITriggerListener
 		Transform.Position = pos;
 
 		// Check if we can eat anything in range
-		foreach ( var obj in ObjectsInRange )
+		var objs = ObjectsInRange.ToList();
+		for ( int i = objs.Count - 1; i >= 0; i-- )
 		{
+			var obj = objs[i];
 			if ( obj.Transform.Position.Distance( Transform.Position ) > (64f * Transform.Scale.x) ) continue;
 			if ( obj.Components.Get<Pellet>() is Pellet pellet )
 			{

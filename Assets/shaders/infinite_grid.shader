@@ -47,6 +47,7 @@ struct PixelInput
 	float3 vNormalOs : TEXCOORD15;
 	float4 vTangentUOs_flTangentVSign : TANGENT	< Semantic( TangentU_SignV ); >;
 	float4 vColor : COLOR0;
+	float4 vTintColor : COLOR1;
 };
 
 VS
@@ -58,6 +59,9 @@ VS
 		PixelInput i = ProcessVertex( v );
 		i.vPositionOs = v.vPositionOs.xyz;
 		i.vColor = v.vColor;
+
+		ExtraShaderData_t extraShaderData = GetExtraPerInstanceShaderData( v );
+		i.vTintColor = extraShaderData.vTint;
 
 		VS_DecodeObjectSpaceNormalAndTangent( v, i.vNormalOs, i.vTangentUOs_flTangentVSign );
 

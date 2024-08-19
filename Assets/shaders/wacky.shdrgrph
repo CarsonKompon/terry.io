@@ -89,8 +89,7 @@
       "UI": {
         "Name": "color",
         "Default": "1,1,1,1",
-        "SrgbRead": true,
-        "CreateInput": "CreateInputTexture2D"
+        "SrgbRead": true
       },
       "Identifier": "7",
       "Position": "-224,-496"

@@ -6,11 +6,11 @@
 @inherits PanelComponent
 
 <root>
-    <img src="/ui/terry_io.png" class="logo" />
+	<img src="/ui/terry_io.png" class="logo" />
 	<div class="lobby-list">
-		<div class="header">
-			<div class="title">Server List</div>
-		</div>
+		@* <div class="header">
+		<div class="title">Server List</div>
+		</div> *@
 
 		<div class="content">
 
@@ -35,8 +35,8 @@
 						<div class="meta">
 
 							@* <div class="map">
-								@lobby.Map
-							</div> *@
+					@lobby.Map
+					</div> *@
 
 							<div class="count">
 								@lobby.Members / @lobby.MaxMembers
@@ -57,7 +57,7 @@
 {
 
 	bool refreshing;
-    List<LobbyInformation> list = new();
+	List<LobbyInformation> list = new();
 
 	[Property] SceneFile GameScene { get; set; }
 
@@ -67,30 +67,30 @@
 	}
 
 	async Task RefreshLobbyList()
-    {
-        while ( true )
-        {
-            refreshing = true;
-            StateHasChanged();
+	{
+		while (true)
+		{
+			refreshing = true;
+			StateHasChanged();
 
-            list = await Networking.QueryLobbies();
+			list = await Networking.QueryLobbies();
 
-            refreshing = false;
-            StateHasChanged();
+			refreshing = false;
+			StateHasChanged();
 
-            await Task.DelayRealtimeSeconds( 5.0f );
-        }
-    }
+			await Task.DelayRealtimeSeconds(5.0f);
+		}
+	}
 
-	void OpenLobby( LobbyInformation lobby )
-    {
-        GameNetworkSystem.Connect( lobby.LobbyId );
-    }
+	void OpenLobby(LobbyInformation lobby)
+	{
+		GameNetworkSystem.Connect(lobby.LobbyId);
+	}
 
 	void StartGame()
 	{
-		Scene.Load( GameScene );
+		Scene.Load(GameScene);
 	}
 
-	protected override int BuildHash() => System.HashCode.Combine( refreshing );
+	protected override int BuildHash() => System.HashCode.Combine(refreshing);
 }
